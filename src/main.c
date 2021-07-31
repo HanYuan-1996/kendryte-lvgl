@@ -10,7 +10,7 @@ int main() {
   setup();
   lv_init();
   lv_port_disp_init();
-  lv_port_indev_init();
+
   while (1) {
     lv_task_handler();
   }

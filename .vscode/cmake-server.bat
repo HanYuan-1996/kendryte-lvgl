@@ -6,4 +6,4 @@ SET PYTHONDONTWRITEBYTECODE=yes
 SET CMAKE_MAKE_PROGRAM=make
 SET KENDRYTE_IDE=yes
 SET LANG=en_US.utf-8
-"e:/Installers/updater.alpha.20190625.1.win32/KendryteIDE/LocalPackage/cmake/bin/cmake.exe" -E server --experimental --pipe=\\?\pipe\kide.cmake_server_pipe.1627696809580
+"e:/Installers/updater.alpha.20190625.1.win32/KendryteIDE/LocalPackage/cmake/bin/cmake.exe" -E server --experimental --pipe=\\?\pipe\kide.cmake_server_pipe.1627699310555
