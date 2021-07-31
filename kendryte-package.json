@@ -1,0 +1,26 @@
+{
+    "$schema": "vscode://schemas/CMakeLists",
+    "name": "kengryte-lvgl",
+    "version": "1.0.0",
+    "entry": "src/main.c",
+    "source": [
+        "src/*.c",
+        "src/*.cpp",
+        "src/*.h",
+        "gui/lvgl/src/core/*.c",
+        "gui/lvgl/src/draw/*.c",
+        "gui/lvgl/src/font/*.c",
+        "gui/lvgl/src/gpu/*.c",
+        "gui/lvgl/src/hal/*.c",
+        "gui/lvgl/src/misc/*.c",
+        "gui/lvgl/src/widgets/*.c",
+        "gui/lvgl_driver/*.c"
+    ],
+    "dependency": {
+        "kendryte/standalone-sdk": "develop"
+    },
+    "header": [
+        "gui",
+        "gui/lvgl_driver"
+    ]
+}
