@@ -535,8 +535,6 @@ static void mcu_lcd_draw_picture(uint16_t x1, uint16_t y1, uint16_t width,
 #endif
         p += 2;
       }
-      while (dual_func) {
-      }
     }
     tft_write_word((uint32_t *)g_lcd_display_buff, g_pixs_draw_pic_size / 2);
   }
