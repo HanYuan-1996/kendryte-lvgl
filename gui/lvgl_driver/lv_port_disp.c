@@ -15,7 +15,7 @@
 /*********************
  *      DEFINES
  *********************/
-#define COLOR_BUF_SIZE (LV_HOR_RES_MAX * LV_VER_RES_MAX)
+#define COLOR_BUF_SIZE (MY_DISP_HOR_RES * MY_DISP_VER_RES)
 /**********************
  *      TYPEDEFS
  **********************/
@@ -34,7 +34,7 @@ static void disp_flush(lv_disp_drv_t* disp_drv, const lv_area_t* area,
 /**********************
  *  STATIC VARIABLES
  **********************/
-static lv_color_t* color_buf;
+static lv_color_t color_buf[COLOR_BUF_SIZE];
 /**********************
  *      MACROS
  **********************/
@@ -79,7 +79,6 @@ void lv_port_disp_init(void) {
 
   /* Example for 1) */
   static lv_disp_draw_buf_t draw_buf_dsc_1;
-  color_buf = (lv_color_t*)malloc(MY_DISP_HOR_RES * MY_DISP_VER_RES);
   // static lv_color_t buf_1[MY_DISP_HOR_RES * 10]; /*A buffer for 10 rows*/
   lv_disp_draw_buf_init(
       &draw_buf_dsc_1, color_buf, NULL,
@@ -141,7 +140,34 @@ void lv_port_disp_init(void) {
  **********************/
 
 /*Initialize your display and the required peripherals.*/
-static void disp_init(void) { /*You code here*/
+#include <fpioa.h>
+#include <lcd.h>
+#include <lcd_mcu.h>
+#include <sysctl.h>
+lcd_t* lcd = &lcd_mcu;
+static void disp_init(void) {
+  /*You code here*/
+  /* initialize spi hardware */
+  lcd->deinit();
+  lcd->lcd_para->freq = 20000000;
+  lcd->lcd_para->rst_pin = 37;
+  lcd->lcd_para->dcx_pin = 38;
+  lcd->lcd_para->cs_pin = 36;
+  lcd->lcd_para->clk_pin = 39;
+  lcd->lcd_para->oct = true;
+  lcd->lcd_para->offset_h0 = 0;
+  lcd->lcd_para->offset_w0 = 0;
+  lcd->lcd_para->dir = DIR_XY_RLUD;
+
+  fpioa_set_function(lcd->lcd_para->rst_pin, FUNC_GPIOHS0 + RST_GPIONUM);
+  fpioa_set_function(lcd->lcd_para->dcx_pin, FUNC_GPIOHS0 + DCX_GPIONUM);
+  fpioa_set_function(lcd->lcd_para->cs_pin,
+                     FUNC_SPI0_SS0 + LCD_SPI_SLAVE_SELECT);
+  fpioa_set_function(lcd->lcd_para->clk_pin, FUNC_SPI0_SCLK);
+  sysctl_set_spi0_dvp_data(1);
+  int ret = lcd->init(lcd->lcd_para);
+  lcd->set_direction(DIR_YX_LRUD);
+  lcd->clear(BLACK);
 }
 
 /*Flush the content of the internal buffer the specific area on the display
@@ -158,6 +184,7 @@ static void disp_flush(lv_disp_drv_t* disp_drv, const lv_area_t* area,
     for (x = area->x1; x <= area->x2; x++) {
       /*Put a pixel to the display. For example:*/
       /*put_px(x, y, *color_p)*/
+      lcd->draw_point(x, y, *(uint16_t*)color_p);
       color_p++;
     }
   }
