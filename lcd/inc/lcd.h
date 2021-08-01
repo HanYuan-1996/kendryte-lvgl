@@ -47,7 +47,7 @@
 #define PINK        0x1FF8
 #define USER_COLOR  0x55AA
 
-#define LCD_SWAP_COLOR_BYTES 1
+#define LCD_SWAP_COLOR_BYTES 0
 #define SWAP_16(x) ((x>>8&0xff) | (x<<8))  // gbrg -> rgb
 
 #if LCD_SWAP_COLOR_BYTES
@@ -148,6 +148,8 @@ typedef struct
 
     void (*draw_point)(uint16_t x, uint16_t y, uint16_t color);
 	void (*draw_string)(uint16_t x, uint16_t y, char *str, uint16_t color);
+
+    void (*draw_pixel_half)(uint16_t x,uint16_t y,uint16_t w,uint16_t h,uint16_t *img);
 
     void (*draw_picture)(uint16_t x,uint16_t y,uint16_t w,uint16_t h,uint8_t *img);
 	void (*draw_pic_roi)(uint16_t x, uint16_t y, uint16_t w, uint16_t h, uint16_t rx, uint16_t ry, uint16_t rw, uint16_t rh, uint8_t *img);

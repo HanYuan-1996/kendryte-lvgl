@@ -52,8 +52,7 @@ int timer_callback(void *ctx) {
   return 1;
 }
 
-corelock_t lock;
-
+#include "lcd.h"
 int main() {
   /* set cpu frequence to 400MHz */
   sysctl_cpu_set_freq(400 * 1000 * 1000);
@@ -68,9 +67,7 @@ int main() {
   lv_port_fs_init();
 
   /* setup app */
-  corelock_lock(&lock);
   setup();
-  corelock_unlock(&lock);
   /* enable irq and begining the lvgl tick */
   timer_init(TIMER_DEVICE_0);
   timer_set_interval(TIMER_DEVICE_0, TIMER_CHANNEL_0, 5 * 1000 * 1000);
@@ -82,7 +79,7 @@ int main() {
   /* lvgl main loop */
   while (1) {
     lv_task_handler();
-    usleep(5 * 1000);
+    usleep(1 * 1000);
   }
 
   return 1;

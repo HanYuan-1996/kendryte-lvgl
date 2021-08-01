@@ -194,14 +194,14 @@ static int mcu_lcd_init(lcd_para_t *lcd_para) {
   tft_hard_init(lcd_para->freq, lcd_para->oct);
   /*soft reset*/
   tft_write_command(SOFTWARE_RESET);
-  msleep(50);
+  msleep(150);
   if (lcd_preinit_handler != NULL) {
     lcd_preinit_handler();
   }
 
   /*exit sleep*/
   tft_write_command(SLEEP_OFF);
-  msleep(120);
+  msleep(500);
   /*pixel format*/
   tft_write_command(PIXEL_FORMAT_SET);
   data = 0x55;
@@ -219,7 +219,7 @@ static int mcu_lcd_init(lcd_para_t *lcd_para) {
   msleep(10);
   /*display on*/
   tft_write_command(DISPALY_ON);
-  // msleep(100);
+  msleep(100);
   lcd_polling_enable();
   return 0;
 }
@@ -483,6 +483,13 @@ static int swap_pixs_half(int core) {
   return 0;
 }
 
+static void mcu_lcd_draw_pixel_half(uint16_t x1, uint16_t y1, uint16_t width,
+                                 uint16_t height, uint16_t *ptr)
+{
+    lcd_set_area(x1, y1, x1 + width - 1, y1 + height - 1);
+    tft_write_half(ptr, width * height);
+}
+
 static void mcu_lcd_draw_picture(uint16_t x1, uint16_t y1, uint16_t width,
                                  uint16_t height, uint8_t *ptr) {
   uint32_t i;
@@ -506,19 +513,9 @@ static void mcu_lcd_draw_picture(uint16_t x1, uint16_t y1, uint16_t width,
     odd = true;
     g_pixs_draw_pic_size -= 1;
   }
+
   if (g_pixs_draw_pic_size > 0) {
-    if (maixpy_sdcard_loading) {
-      for (i = 0; i < g_pixs_draw_pic_size; i += 2) {
-#if LCD_SWAP_COLOR_BYTES
-        g_lcd_display_buff[i] = SWAP_16(*(p + 1));
-        g_lcd_display_buff[i + 1] = SWAP_16(*(p));
-#else
-        g_lcd_display_buff[i] = *(p + 1);
-        g_lcd_display_buff[i + 1] = *p;
-#endif
-        p += 2;
-      }
-    } else {
+
       g_pixs_draw_pic_half_size = g_pixs_draw_pic_size / 2;
       g_pixs_draw_pic_half_size = (g_pixs_draw_pic_half_size % 2)
                                       ? (g_pixs_draw_pic_half_size + 1)
@@ -535,9 +532,9 @@ static void mcu_lcd_draw_picture(uint16_t x1, uint16_t y1, uint16_t width,
 #endif
         p += 2;
       }
-    }
     tft_write_word((uint32_t *)g_lcd_display_buff, g_pixs_draw_pic_size / 2);
   }
+
   if (odd) {
 #if LCD_SWAP_COLOR_BYTES
     g_lcd_display_buff[0] = SWAP_16(((uint16_t *)ptr)[g_pixs_draw_pic_size]);
@@ -623,6 +620,7 @@ lcd_t lcd_mcu = {
 
     .draw_point = mcu_lcd_draw_point,
     .draw_string = mcu_lcd_draw_string,
+    .draw_pixel_half = mcu_lcd_draw_pixel_half,
     .draw_picture = mcu_lcd_draw_picture,
     .draw_pic_roi = mcu_lcd_draw_pic_roi,
     .draw_pic_gray = mcu_lcd_draw_pic_gray,
