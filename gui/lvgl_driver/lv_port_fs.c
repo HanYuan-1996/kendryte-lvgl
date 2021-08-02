@@ -75,7 +75,7 @@ void lv_port_fs_init(void) {
   lv_fs_drv_init(&fs_drv);
 
   /*Set up fields...*/
-  fs_drv.letter = 'P';
+  fs_drv.letter = '/';
   fs_drv.open_cb = fs_open;
   fs_drv.close_cb = fs_close;
   fs_drv.read_cb = fs_read;

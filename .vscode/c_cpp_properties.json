@@ -4,17 +4,17 @@
         {
             "name": "Default",
             "defines": [],
-            "compilerPath": "e:/Installers/updater.alpha.20190625.1.win32/KendryteIDE/LocalPackage/toolchain/bin/riscv64-unknown-elf-g++",
+            "compilerPath": "E:/Installers/updater.alpha.20190625.1.win32/KendryteIDE/LocalPackage/toolchain/bin/riscv64-unknown-elf-g++",
             "cStandard": "c11",
             "cppStandard": "c++17",
             "intelliSenseMode": "gcc-x64",
             "compileCommands": "e:/Github/kengryte-lvgl/.vscode/compile_commands.backup.json",
             "includePath": [
-                "e:/Installers/updater.alpha.20190625.1.win32/KendryteIDE/LocalPackage/toolchain/riscv64-unknown-elf/include",
-                "e:/Installers/updater.alpha.20190625.1.win32/KendryteIDE/LocalPackage/toolchain/lib/gcc/riscv64-unknown-elf/8.2.0/include",
-                "e:/Installers/updater.alpha.20190625.1.win32/KendryteIDE/LocalPackage/toolchain/lib/gcc/riscv64-unknown-elf/8.2.0/include-fixed",
-                "e:/Installers/updater.alpha.20190625.1.win32/KendryteIDE/LocalPackage/toolchain/riscv64-unknown-elf/include/c++/8.2.0",
-                "e:/Installers/updater.alpha.20190625.1.win32/KendryteIDE/LocalPackage/toolchain/riscv64-unknown-elf/include/c++/8.2.0/riscv64-unknown-elf"
+                "E:/Installers/updater.alpha.20190625.1.win32/KendryteIDE/LocalPackage/toolchain/riscv64-unknown-elf/include",
+                "E:/Installers/updater.alpha.20190625.1.win32/KendryteIDE/LocalPackage/toolchain/lib/gcc/riscv64-unknown-elf/8.2.0/include",
+                "E:/Installers/updater.alpha.20190625.1.win32/KendryteIDE/LocalPackage/toolchain/lib/gcc/riscv64-unknown-elf/8.2.0/include-fixed",
+                "E:/Installers/updater.alpha.20190625.1.win32/KendryteIDE/LocalPackage/toolchain/riscv64-unknown-elf/include/c++/8.2.0",
+                "E:/Installers/updater.alpha.20190625.1.win32/KendryteIDE/LocalPackage/toolchain/riscv64-unknown-elf/include/c++/8.2.0/riscv64-unknown-elf"
             ]
         }
     ]

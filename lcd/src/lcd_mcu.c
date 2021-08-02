@@ -594,7 +594,7 @@ static void lcd_ram_cpyimg(char *lcd, int lcdw, char *img, int imgw, int imgh,
   return;
 }
 
-/************************* MCU 屝坂数  ****************************/
+/************************* MCU å±�å�‚æ•°  ****************************/
 static lcd_para_t mcu_lcd_default = {
     .lcd_type = LCD_TYPE_ST7789,
     .width = 320,

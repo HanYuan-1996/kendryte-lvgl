@@ -42,7 +42,7 @@
 
 /*1: use custom malloc/free, 0: use the built-in `lv_mem_alloc()` and
  * `lv_mem_free()`*/
-#define LV_MEM_CUSTOM 0
+#define LV_MEM_CUSTOM 1
 #if LV_MEM_CUSTOM == 0
 /*Size of the memory available for `lv_mem_alloc()` in bytes (>= 2kB)*/
 #define LV_MEM_SIZE (32U * 1024U) /*[bytes]*/
@@ -68,7 +68,7 @@
 
 /*Default display refresh period. LVG will redraw changed ares with this period
  * time*/
-#define LV_DISP_DEF_REFR_PERIOD 30 /*[ms]*/
+#define LV_DISP_DEF_REFR_PERIOD 20 /*[ms]*/
 
 /*Input device read period in milliseconds*/
 #define LV_INDEV_DEF_READ_PERIOD 30 /*[ms]*/
@@ -77,11 +77,13 @@
  *It removes the need to manually update the tick with `lv_tick_inc()`)*/
 #define LV_TICK_CUSTOM 0
 #if LV_TICK_CUSTOM
+#ifdef ARDUINO
 #define LV_TICK_CUSTOM_INCLUDE \
   "Arduino.h" /*Header for the system time function*/
 #define LV_TICK_CUSTOM_SYS_TIME_EXPR \
   (millis()) /*Expression evaluating to current system time in ms*/
-#endif       /*LV_TICK_CUSTOM*/
+#endif
+#endif /*LV_TICK_CUSTOM*/
 
 /*Default Dot Per Inch. Used to initialize default sizes such as widgets sized,
  *style paddings. (Not so important, you can adjust it to modify default sizes
@@ -105,7 +107,7 @@
 /*Allow buffering some shadow calculation.
  *LV_SHADOW_CACHE_SIZE is the max. shadow size to buffer, where shadow size is
  *`shadow_width + radius` Caching has LV_SHADOW_CACHE_SIZE^2 RAM cost*/
-#define LV_SHADOW_CACHE_SIZE 0
+#define LV_SHADOW_CACHE_SIZE 50
 #endif /*LV_DRAW_COMPLEX*/
 
 /*Default image cache size. Image caching keeps the images opened.
@@ -114,7 +116,7 @@
  *(e.g. PNG or JPG) caching can save the continuous open/decode of images.
  *However the opened images might consume additional RAM.
  *0: to disable caching*/
-#define LV_IMG_CACHE_DEF_SIZE 0
+#define LV_IMG_CACHE_DEF_SIZE 9
 
 /*Maximum buffer size to allocate for rotation. Only used if software rotation
  * is enabled in the display driver.*/
@@ -191,11 +193,11 @@ e.g. "stm32f769xx.h" or "stm32f429xx.h"*/
   1 /*Checks is the memory is successfully allocated or no. (Very fast, \
        recommended)*/
 #define LV_USE_ASSERT_STYLE \
-  0 /*Check if the styles are properly initialized. (Very fast, recommended)*/
+  1 /*Check if the styles are properly initialized. (Very fast, recommended)*/
 #define LV_USE_ASSERT_MEM_INTEGRITY \
-  0 /*Check the integrity of `lv_mem` after critical operations. (Slow)*/
+  1 /*Check the integrity of `lv_mem` after critical operations. (Slow)*/
 #define LV_USE_ASSERT_OBJ \
-  0 /*Check the object's type and existence (e.g. not deleted). (Slow)*/
+  1 /*Check the object's type and existence (e.g. not deleted). (Slow)*/
 
 /*Add a custom handler when assert happens e.g. to restart the MCU*/
 #define LV_ASSERT_HANDLER_INCLUDE <stdint.h>
@@ -290,7 +292,7 @@ e.g. "stm32f769xx.h" or "stm32f429xx.h"*/
 /*Montserrat fonts with ASCII range and some symbols using bpp = 4
  *https://fonts.google.com/specimen/Montserrat*/
 #define LV_FONT_MONTSERRAT_8 0
-#define LV_FONT_MONTSERRAT_10 0
+#define LV_FONT_MONTSERRAT_10 1
 #define LV_FONT_MONTSERRAT_12 0
 #define LV_FONT_MONTSERRAT_14 1
 #define LV_FONT_MONTSERRAT_16 0
@@ -329,15 +331,15 @@ e.g. "stm32f769xx.h" or "stm32f429xx.h"*/
 #define LV_FONT_CUSTOM_DECLARE
 
 /*Always set a default font*/
-#define LV_FONT_DEFAULT &lv_font_montserrat_14
+#define LV_FONT_DEFAULT &lv_font_montserrat_10
 
 /*Enable handling large font and/or fonts with a lot of characters.
  *The limit depends on the font size, font face and bpp.
  *Compiler error will be triggered if a font needs it.*/
-#define LV_FONT_FMT_TXT_LARGE 0
+#define LV_FONT_FMT_TXT_LARGE 1
 
 /*Enables/disables support for compressed fonts.*/
-#define LV_USE_FONT_COMPRESSED 0
+#define LV_USE_FONT_COMPRESSED 1
 
 /*Enable subpixel rendering*/
 #define LV_USE_FONT_SUBPX 0
@@ -509,7 +511,7 @@ e.g. "stm32f769xx.h" or "stm32f429xx.h"*/
  * Themes
  *----------*/
 /*A simple, impressive and very complete theme*/
-#define LV_USE_THEME_DEFAULT 1
+#define LV_USE_THEME_DEFAULT 0
 #if LV_USE_THEME_DEFAULT
 
 /*0: Light mode; 1: Dark mode*/
@@ -523,10 +525,10 @@ e.g. "stm32f769xx.h" or "stm32f429xx.h"*/
 #endif /*LV_USE_THEME_DEFAULT*/
 
 /*An very simple them that is a good starting point for a custom theme*/
-#define LV_USE_THEME_BASIC 1
+#define LV_USE_THEME_BASIC 0
 
 /*A theme designed for monochrome displays*/
-#define LV_USE_THEME_MONO 1
+#define LV_USE_THEME_MONO 0
 
 /*-----------
  * Layouts
@@ -543,7 +545,7 @@ e.g. "stm32f769xx.h" or "stm32f429xx.h"*/
  *==================*/
 
 /*Enable the examples to be built with the library*/
-#define LV_BUILD_EXAMPLES 1
+#define LV_BUILD_EXAMPLES 0
 
 /*--END OF LV_CONF_H--*/
 

@@ -25,14 +25,37 @@
 
 #define DATA_CENTER_USE_LOG 1
 
+
+#define DATA_CENTER_LOG_ERR    0
+#define DATA_CENTER_LOG_WARN   1
+#define DATA_CENTER_LOG_INFO   2
+
+#define DATA_CENTER_LOG_LEVEL   DATA_CENTER_LOG_ERR
+
 #if !defined(ARDUINO) && DATA_CENTER_USE_LOG
 #include <stdio.h>
-#define DC_LOG_INFO(format, ...) \
-  printf("\r\nDC INFO: "), printf(format, ##__VA_ARGS__)
-#define DC_LOG_WARN(format, ...) \
-  printf("\r\nDC WARN: "), printf(format, ##__VA_ARGS__)
+
+#if DATA_CENTER_LOG_LEVEL >= DATA_CENTER_LOG_ERR
 #define DC_LOG_ERROR(format, ...) \
   printf("\r\nDC ERROR: "), printf(format, ##__VA_ARGS__)
+#else
+#define DC_LOG_ERROR(...)
+#endif
+
+#if DATA_CENTER_LOG_LEVEL >= DATA_CENTER_LOG_WARN
+#define DC_LOG_WARN(format, ...) \
+  printf("\r\nDC WARN: "), printf(format, ##__VA_ARGS__)
+#else
+#define DC_LOG_WARN(...)
+#endif
+
+#if DATA_CENTER_LOG_LEVEL >= DATA_CENTER_LOG_INFO
+#define DC_LOG_INFO(format, ...) \
+  printf("\r\nDC INFO: "), printf(format, ##__VA_ARGS__)
+#else
+#define DC_LOG_INFO(...)
+#endif
+
 #else
 #define DC_LOG_INFO(...)
 #define DC_LOG_WARN(...)

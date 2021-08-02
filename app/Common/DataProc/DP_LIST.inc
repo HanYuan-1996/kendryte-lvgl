@@ -2,7 +2,7 @@
 /* Data processing node list */
 DP_DEF(Storage, 0);
 DP_DEF(Clock, 0);
-// DP_DEF(GPS, sizeof(HAL::GPS_Info_t));
+DP_DEF(GPS, sizeof(HAL::GPS_Info_t));
 DP_DEF(Power, 0);
 DP_DEF(SportStatus, sizeof(HAL::SportStatus_Info_t));
 DP_DEF(Recorder, 0);
