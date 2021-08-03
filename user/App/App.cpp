@@ -26,8 +26,6 @@
 #include "Pages/AppFactory.h"
 #include "Pages/StatusBar/StatusBar.h"
 
-static AppFactory factory;
-static PageManager manager(&factory);
 
 #define ACCOUNT_SEND_CMD(ACT, CMD)\
 do{\
@@ -39,6 +37,9 @@ do{\
 
 void App_Init()
 {
+    static AppFactory factory;
+    static PageManager manager(&factory);
+
     DataProc_Init();
 
     lv_obj_remove_style_all(lv_scr_act());
