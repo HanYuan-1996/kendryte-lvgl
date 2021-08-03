@@ -127,8 +127,6 @@ static int fs_init(void) {
  * @return          a file descriptor or NULL on error
  */
 static void *fs_open(lv_fs_drv_t *drv, const char *path, lv_fs_mode_t mode) {
-  lv_fs_res_t res = LV_FS_RES_NOT_IMP;
-
   FRESULT f;
   FIL *file = NULL;
   if (mode == LV_FS_MODE_WR) {
@@ -155,7 +153,7 @@ static lv_fs_res_t fs_close(lv_fs_drv_t *drv, void *file_p) {
   lv_fs_res_t res = LV_FS_RES_NOT_IMP;
 
   /*Add your code here*/
-  res = (lv_fs_res_t)f_close(file_p);
+  res = FRESULT_2_lv_fs_res_t[f_close(file_p)];
   return res;
 }
 
@@ -173,7 +171,7 @@ static lv_fs_res_t fs_read(lv_fs_drv_t *drv, void *file_p, void *buf,
   lv_fs_res_t res = LV_FS_RES_NOT_IMP;
 
   /*Add your code here*/
-  res = (lv_fs_res_t)f_read(file_p, buf, btr, br);
+  res = FRESULT_2_lv_fs_res_t[f_read(file_p, buf, btr, br)];
   return res;
 }
 
@@ -192,7 +190,7 @@ static lv_fs_res_t fs_write(lv_fs_drv_t *drv, void *file_p, const void *buf,
   lv_fs_res_t res = LV_FS_RES_NOT_IMP;
 
   /*Add your code here*/
-  res = f_write(file_p, buf, btw, bw);
+  res = FRESULT_2_lv_fs_res_t[f_write(file_p, buf, btw, bw)];
   return res;
 }
 
@@ -209,7 +207,7 @@ static lv_fs_res_t fs_seek(lv_fs_drv_t *drv, void *file_p, uint32_t pos,
   lv_fs_res_t res = LV_FS_RES_NOT_IMP;
 
   /*Add your code here*/
-  res = f_lseek(file_p, pos);
+  res = FRESULT_2_lv_fs_res_t[f_lseek(file_p, pos)];
   return res;
 }
 /**
@@ -221,10 +219,9 @@ static lv_fs_res_t fs_seek(lv_fs_drv_t *drv, void *file_p, uint32_t pos,
  */
 static lv_fs_res_t fs_tell(lv_fs_drv_t *drv, void *file_p, uint32_t *pos_p) {
   lv_fs_res_t res = LV_FS_RES_NOT_IMP;
-
   /*Add your code here*/
-  pos_p = (uint32_t)f_tell((FIL *)file_p);
-  return res;
+  pos_p = (uint32_t *)f_tell((FIL *)file_p);
+  return pos_p ? LV_FS_RES_OK : LV_FS_RES_NOT_IMP;
 }
 
 /**
@@ -251,9 +248,10 @@ static void *fs_dir_open(lv_fs_drv_t *drv, const char *path) {
  */
 static lv_fs_res_t fs_dir_read(lv_fs_drv_t *drv, void *rddir_p, char *fn) {
   lv_fs_res_t res = LV_FS_RES_NOT_IMP;
-
+  FILINFO fno;
   /*Add your code here*/
-  res = f_readdir(rddir_p, fn);
+  res = FRESULT_2_lv_fs_res_t[f_readdir(rddir_p, &fno)];
+  fn = fno.fname;
   return res;
 }
 
@@ -267,7 +265,7 @@ static lv_fs_res_t fs_dir_close(lv_fs_drv_t *drv, void *rddir_p) {
   lv_fs_res_t res = LV_FS_RES_NOT_IMP;
 
   /*Add your code here*/
-  res = f_closedir(rddir_p);
+  res = FRESULT_2_lv_fs_res_t[f_closedir(rddir_p)];
   return res;
 }
 

@@ -81,14 +81,16 @@ void lv_port_disp_init(void) {
   // static lv_disp_draw_buf_t draw_buf_dsc_1;
   // static lv_color_t buf_1[MY_DISP_HOR_RES * 10]; /*A buffer for 10 rows*/
   // lv_disp_draw_buf_init(&draw_buf_dsc_1, color_buf, NULL,
-  //                       MY_DISP_HOR_RES * 8); /*Initialize the display buffer*/
+  //                       MY_DISP_HOR_RES * 8); /*Initialize the display
+  //                       buffer*/
 
   /* Example for 2) */
   static lv_disp_draw_buf_t draw_buf_dsc_2;
-  static lv_color_t buf_2_1[MY_DISP_HOR_RES * 10]; /*A buffer for 10 rows*/
-  static lv_color_t buf_2_2[MY_DISP_HOR_RES * 10]; /*An other buffer for 10 rows*/
+  static lv_color_t buf_2_1[MY_DISP_HOR_RES * 32]; /*A buffer for 10 rows*/
+  static lv_color_t
+      buf_2_2[MY_DISP_HOR_RES * 32]; /*An other buffer for 10 rows*/
   lv_disp_draw_buf_init(&draw_buf_dsc_2, buf_2_1, buf_2_2,
-                        MY_DISP_HOR_RES * 10); /*Initialize the display
+                        MY_DISP_HOR_RES * 32); /*Initialize the display
                         buffer*/
 
   /* Example for 3) also set disp_drv.full_refresh = 1 below*/
@@ -147,7 +149,7 @@ static void disp_init(void) {
   /*You code here*/
   /* initialize spi hardware */
   lcd->deinit();
-  lcd->lcd_para->freq = 10000000;
+  lcd->lcd_para->freq = 20000000;
   lcd->lcd_para->rst_pin = 37;
   lcd->lcd_para->dcx_pin = 38;
   lcd->lcd_para->cs_pin = 36;
@@ -177,7 +179,7 @@ static void disp_flush(lv_disp_drv_t* disp_drv, const lv_area_t* area,
    * one-by-one*/
 
   lcd->draw_pixel_half(area->x1, area->y1, area->x2 - area->x1 + 1,
-                    area->y2 - area->y1 + 1, (uint16_t*)color_p);
+                       area->y2 - area->y1 + 1, (uint16_t*)color_p);
 
   // int32_t x;
   // int32_t y;
