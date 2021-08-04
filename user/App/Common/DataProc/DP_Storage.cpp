@@ -5,7 +5,12 @@
 
 using namespace DataProc;
 
-static StorageService storageService(CONFIG_SYSTEM_SAVE_FILE_PATH);
+/**
+ *  创建存储服务
+ *  修改为这样是因为在kendryte ide中出现全局对象不调用构造函数的问题
+ *  网上看到的解释这个问题与ld相关
+ **/
+static StorageService* storageService;
 
 static int onEvent(Account* account, Account::EventParam_t* param)
 {
@@ -38,13 +43,13 @@ static int onEvent(Account* account, Account::EventParam_t* param)
     switch (info->cmd)
     {
     case STORAGE_CMD_LOAD:
-        storageService.LoadFile();
+        storageService->LoadFile();
         break;
     case STORAGE_CMD_SAVE:
-        storageService.SaveFile();
+        storageService->SaveFile();
         break;
     case STORAGE_CMD_ADD:
-        storageService.Add(
+        storageService->Add(
             info->key,
             info->value,
             info->size,
@@ -52,7 +57,7 @@ static int onEvent(Account* account, Account::EventParam_t* param)
         );
         break;
     case STORAGE_CMD_REMOVE:
-        storageService.Remove(info->key);
+        storageService->Remove(info->key);
         break;
     default:
         break;
@@ -65,12 +70,13 @@ static void onSDEvent(bool insert)
 {
     if(insert)
     {
-        storageService.LoadFile();
+        storageService->LoadFile();
     }
 }
 
 DATA_PROC_INIT_DEF(Storage)
 {
+    storageService = new StorageService(CONFIG_SYSTEM_SAVE_FILE_PATH);
     account->SetEventCallback(onEvent);
     HAL::SD_SetEventCallback(onSDEvent);
 }

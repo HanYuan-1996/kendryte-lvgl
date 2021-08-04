@@ -119,7 +119,6 @@ lv_meter_indicator_t * lv_meter_add_needle_line(lv_obj_t * obj, lv_meter_scale_t
     lv_meter_indicator_t * indic = _lv_ll_ins_head(&meter->indicator_ll);
     LV_ASSERT_MALLOC(indic);
     lv_memset_00(indic, sizeof(lv_meter_indicator_t));
-    indic->par = obj;
     indic->scale = scale;
     indic->opa = LV_OPA_COVER;
 
@@ -156,7 +155,6 @@ lv_meter_indicator_t * lv_meter_add_arc(lv_obj_t * obj, lv_meter_scale_t * scale
     lv_meter_indicator_t * indic = _lv_ll_ins_head(&meter->indicator_ll);
     LV_ASSERT_MALLOC(indic);
     lv_memset_00(indic, sizeof(lv_meter_indicator_t));
-    indic->par = obj;
     indic->scale = scale;
     indic->opa = LV_OPA_COVER;
 

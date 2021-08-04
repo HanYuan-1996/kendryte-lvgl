@@ -17,6 +17,12 @@ public:
         lv_obj_t* lableUnit;
     } SubInfo_t;
 
+    typedef struct
+    {
+        lv_obj_t* meter;
+        lv_meter_indicator_t* indic;
+    } indicInfo_t;
+
 public:
     struct
     {
@@ -26,7 +32,7 @@ public:
             lv_obj_t* labelSpeed;
             lv_obj_t* labelUint;
 
-            struct 
+            struct
             {
                 lv_obj_t* meter;
                 lv_meter_indicator_t* indic_100;
@@ -34,7 +40,7 @@ public:
                 lv_meter_indicator_t* indic_300;
                 lv_meter_indicator_t* needle;
             } meterSpeed;
-            
+
         } topInfo;
 
         struct
@@ -56,14 +62,14 @@ public:
     void SetSpeedMeter(int speed);
 
 private:
-    
+
 
     void TopInfo_Create(lv_obj_t* par);
     void BottomInfo_Create(lv_obj_t* par);
     void SubInfoGrp_Create(lv_obj_t* par, SubInfo_t* info, const char* unitText);
     void BtnCont_Create(lv_obj_t* par);
     lv_obj_t* Btn_Create(lv_obj_t* par, const void* img_src, lv_coord_t x_ofs);
-    
+
 };
 
 }

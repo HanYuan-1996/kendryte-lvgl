@@ -47,10 +47,17 @@ int main() {
                      NULL);
   timer_set_enable(TIMER_DEVICE_0, TIMER_CHANNEL_0, 1);
 
+  static int count = 0;
   /* lvgl main loop */
   while (1) {
+    /* do something */
     lv_task_handler();
     __wfi();
+
+    if(++count % 60000 == 0){
+      App_save();
+    }
+
   }
 
   return 1;

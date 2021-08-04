@@ -54,7 +54,6 @@ typedef enum {
 }lv_meter_indicator_type_t;
 
 typedef struct {
-    lv_obj_t* par;
     lv_meter_scale_t * scale;
     lv_meter_indicator_type_t type;
     lv_opa_t opa;

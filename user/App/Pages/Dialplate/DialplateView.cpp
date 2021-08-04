@@ -4,16 +4,6 @@
 
 using namespace Page;
 
-void setSpeed_cb(void *obj, int var) {
-    if(obj == NULL || ((lv_meter_indicator_t *)obj)->par == NULL){
-        return;
-    }
-    lv_meter_set_indicator_end_value(   ((lv_meter_indicator_t *)obj)->par,
-                                        (lv_meter_indicator_t *)obj, 
-                                        var
-                                    );
-}
-
 void DialplateView::Create(lv_obj_t* root)
 {
     lv_obj_remove_style_all(root);
@@ -24,64 +14,46 @@ void DialplateView::Create(lv_obj_t* root)
     BtnCont_Create(root);
 }
 
-void DialplateView::SetSpeedMeter(int speed) 
+void DialplateView::SetSpeedMeter(int speed)
 {
+    int Speed[4] = {0};
+    int i;
 
-    int speed_100 = 0;
-    int speed_200 = 0;
-    int speed_300 = 0;
-    int needle = 0;
+    static indicInfo_t info[4] = {
+    {ui.topInfo.meterSpeed.meter, ui.topInfo.meterSpeed.indic_100},
+    {ui.topInfo.meterSpeed.meter, ui.topInfo.meterSpeed.indic_200},
+    {ui.topInfo.meterSpeed.meter, ui.topInfo.meterSpeed.indic_300},
+    {ui.topInfo.meterSpeed.meter, ui.topInfo.meterSpeed.needle},
+    };
 
     if (speed < 0)
         return;
+    if (speed > 300)
+        speed = 300;
 
-    if (speed <= 100) {
-        speed_100 = speed % 101;
-        needle = speed_100;
+    for (i = 0; i < speed/100; i++)
+    {
+      Speed[i] = 100;
     }
-    else if (speed > 100 && speed <= 200) {
-        speed_100 = 100;
-        speed_200 = speed % 101;
-        needle = speed_200;
-    }
-    else if (speed > 200 && speed <= 300) {
-        speed_100 = 100;
-        speed_200 = 100;
-        speed_300 = speed % 101;
-        needle = speed_300;
-    }
-    else {
-        speed_100 = 100;
-        speed_200 = 100;
-        speed_300 = 100;
-        needle = 100;
-    }
+    Speed[i] = speed % 101;
+    Speed[3] = speed % 101;
 
     /* anim */
-    lv_obj_add_anim((lv_obj_t *)ui.topInfo.meterSpeed.indic_100,
-                    NULL,
-                    setSpeed_cb,
-                    ui.topInfo.meterSpeed.indic_100->end_value,
-                    speed_100,
-                    1000);
-    lv_obj_add_anim((lv_obj_t *)ui.topInfo.meterSpeed.indic_200,
-                    NULL,
-                    setSpeed_cb,
-                    ui.topInfo.meterSpeed.indic_200->end_value,
-                    speed_200,
-                    1000);
-    lv_obj_add_anim((lv_obj_t *)ui.topInfo.meterSpeed.indic_300,
-                    NULL,
-                    setSpeed_cb,
-                    ui.topInfo.meterSpeed.indic_300->end_value,
-                    speed_300,
-                    1000);
-    lv_obj_add_anim((lv_obj_t *)ui.topInfo.meterSpeed.needle,
-                    NULL,
-                    setSpeed_cb,
-                    ui.topInfo.meterSpeed.needle->end_value,
-                    needle,
-                    1000);
+    for (int i = 0; i < 4; i++) {
+        lv_obj_add_anim((lv_obj_t *)&info[i],
+                        NULL,
+                        [](void* obj, int var) {
+                            indicInfo_t* info = (indicInfo_t*)obj;
+                            if (info->meter == NULL || info->indic == NULL)
+                                return;
+                            lv_meter_set_indicator_end_value(   info->meter,
+                                                                info->indic,
+                                                                var);
+                        },
+                        info[i].indic->end_value,
+                        Speed[i],
+                        1000);
+    }
 }
 
 void DialplateView::TopInfo_Create(lv_obj_t* par)
@@ -133,11 +105,10 @@ void DialplateView::TopInfo_Create(lv_obj_t* par)
     lv_meter_indicator_t* indic3 = lv_meter_add_arc(meter, scale, 5, lv_palette_main(LV_PALETTE_RED), 10);
     lv_meter_indicator_t* needle = lv_meter_add_needle_line(meter, scale, 2, lv_color_white(), -7);
 
-    ui.topInfo.meterSpeed.meter = meter;
-    ui.topInfo.meterSpeed.indic_100 = indic1;
-    ui.topInfo.meterSpeed.indic_200 = indic2;
-    ui.topInfo.meterSpeed.indic_300 = indic3;
-    ui.topInfo.meterSpeed.needle = needle;
+    ui.topInfo.meterSpeed = {
+        meter,indic1,indic2,indic3,needle
+    };
+
 }
 
 void DialplateView::BottomInfo_Create(lv_obj_t* par)

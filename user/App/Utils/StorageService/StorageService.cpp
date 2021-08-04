@@ -82,6 +82,11 @@ public:
         return bw;
     }
 
+    lv_fs_res_t getLastError()
+    {
+        return fs_res;
+    }
+
     operator bool()
     {
         return fs_res == LV_FS_RES_OK;
@@ -149,7 +154,7 @@ bool StorageService::LoadFile()
 
     if (!file)
     {
-        LV_LOG_USER("Failed to open file %s", FilePath);
+        LV_LOG_USER("Failed to open file %s, error code: %d", FilePath, file.getLastError());
         return false;
     }
 

@@ -45,6 +45,10 @@ Account::Account(
     Center = center;
     UserData = userData;
 
+    /* in case AccountMain sub itself */
+    if (this == &Center->AccountMain)
+        return;
+
     if (bufSize != 0)
     {
         uint8_t* buf0 = new uint8_t[bufSize];

@@ -75,7 +75,7 @@ void lv_port_fs_init(void) {
   lv_fs_drv_init(&fs_drv);
 
   /*Set up fields...*/
-  fs_drv.letter = '/';
+  fs_drv.letter = 'p';
   fs_drv.open_cb = fs_open;
   fs_drv.close_cb = fs_close;
   fs_drv.read_cb = fs_read;
@@ -128,7 +128,7 @@ static int fs_init(void) {
  */
 static void *fs_open(lv_fs_drv_t *drv, const char *path, lv_fs_mode_t mode) {
   FRESULT f;
-  FIL *file = NULL;
+  FIL *file = lv_mem_alloc(sizeof(FIL));
   if (mode == LV_FS_MODE_WR) {
     /*Open a file for write*/
     f = f_open(file, path, FA_WRITE); /*Add your code here*/
@@ -140,7 +140,7 @@ static void *fs_open(lv_fs_drv_t *drv, const char *path, lv_fs_mode_t mode) {
     f = f_open(file, path, FA_READ | FA_WRITE); /*Add your code here*/
   }
 
-  return file;
+  return (void *)file;
 }
 
 /**
@@ -154,6 +154,7 @@ static lv_fs_res_t fs_close(lv_fs_drv_t *drv, void *file_p) {
 
   /*Add your code here*/
   res = FRESULT_2_lv_fs_res_t[f_close(file_p)];
+  lv_mem_free(file_p);
   return res;
 }
 

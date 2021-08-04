@@ -69,3 +69,9 @@ void App_Uninit()
     ACCOUNT_SEND_CMD(Storage,   STORAGE_CMD_SAVE);
     ACCOUNT_SEND_CMD(Recorder,  RECORDER_CMD_STOP);
 }
+
+void App_save()
+{
+    ACCOUNT_SEND_CMD(SysConfig, SYSCONFIG_CMD_SAVE);
+    ACCOUNT_SEND_CMD(Storage,   STORAGE_CMD_SAVE);
+}
