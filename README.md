@@ -1,7 +1,5 @@
-# hello world project
+# README
 
-Thanks for using Kendryte IDE.
+本项目是移植X-TRACK到maixdock板上
+并且在UI项目的基础之上修改DialplateView面板，添加了一个速度仪表盘speedMeter
 
-This is an empty example project.
-
-If you found a bug, please visit https://github.com/kendryte/kendryte-ide/issues
