@@ -1,4 +1,4 @@
-cd "e:/Github/kengryte-lvgl/build"
+cd "e:/Github/kendryte-lvgl/build"
 SET ALLUSERSPROFILE=C:\ProgramData
 SET APPDATA=C:\Users\Hy\AppData\Roaming
 SET CommonProgramFiles=C:\Program Files\Common Files
@@ -8,13 +8,15 @@ SET COMPUTERNAME=HANYUAN
 SET ComSpec=C:\WINDOWS\system32\cmd.exe
 SET DriverData=C:\Windows\System32\Drivers\DriverData
 SET FLUTTER=D:\flutter\bin
+SET FPS_BROWSER_APP_PROFILE_STRING=Internet Explorer
+SET FPS_BROWSER_USER_PROFILE_STRING=Default
 SET HOMEDRIVE=C:
 SET HOMEPATH=\Users\Hy
 SET KENDRYTE_IDE_LOCAL_PACKAGE_DIR=E:\Installers\updater.alpha.20190625.1.win32\KendryteIDE\LocalPackage
 SET KENDRYTE_IDE_UPDATER=E:\Installers\updater.alpha.20190625.1.win32\KendryteIDE\Updater\electron.exe
 SET KENDRYTE_IDE_UPDATER_CONTENT_ROOT=E:\Installers\updater.alpha.20190625.1.win32\KendryteIDE
 SET KENDRYTE_IDE_UPDATER_IS_BUILT=yes
-SET KENDRYTE_IDE_UPDATER_PIPE=\\?\pipe\C:\Users\Hy\AppData\Local\Temp\KendryteIDE_Cache\58971_updater.sock
+SET KENDRYTE_IDE_UPDATER_PIPE=\\?\pipe\C:\Users\Hy\AppData\Local\Temp\KendryteIDE_Cache\37018_updater.sock
 SET KENDRYTE_IDE_UPDATER_PIPE_ID=1
 SET KEYSHOT10=C:\Users\Public\Documents\KeyShot 10
 SET LOCALAPPDATA=C:\Users\Hy\AppData\Local
@@ -48,11 +50,11 @@ SET USERNAME=Hy
 SET USERPROFILE=C:\Users\Hy
 SET VSCODE_CWD=C:\WINDOWS\system32
 SET VSCODE_IPC_HOOK=\\.\pipe\6f03075f0d5676060375ffda56aa93e2-1.40.0-alpha-main-sock
-SET VSCODE_LOGS=E:\Installers\updater.alpha.20190625.1.win32\KendryteIDE\UserData\latest\user-data\logs\20210804T003828
+SET VSCODE_LOGS=E:\Installers\updater.alpha.20190625.1.win32\KendryteIDE\UserData\latest\user-data\logs\20210805T013121
 SET VSCODE_NLS_CONFIG={"locale":"zh-cn","availableLanguages":{"*":"zh-cn"},"_languagePackId":"79814620730225ef32bccae5cfb6d634.zh-cn","_translationsConfigFile":"E:\\Installers\\updater.alpha.20190625.1.win32\\KendryteIDE\\UserData\\latest\\user-data\\clp\\79814620730225ef32bccae5cfb6d634.zh-cn\\tcf.json","_cacheRoot":"E:\\Installers\\updater.alpha.20190625.1.win32\\KendryteIDE\\UserData\\latest\\user-data\\clp\\79814620730225ef32bccae5cfb6d634.zh-cn","_resolvedLanguagePackCoreLocation":"E:\\Installers\\updater.alpha.20190625.1.win32\\KendryteIDE\\UserData\\latest\\user-data\\clp\\79814620730225ef32bccae5cfb6d634.zh-cn\\e7a289810b81f69dbc43081e47cb9afd9a568bcb","_corruptedFile":"E:\\Installers\\updater.alpha.20190625.1.win32\\KendryteIDE\\UserData\\latest\\user-data\\clp\\79814620730225ef32bccae5cfb6d634.zh-cn\\corrupted.info","_languagePackSupport":true}
 SET VSCODE_NODE_CACHED_DATA_DIR=E:\Installers\updater.alpha.20190625.1.win32\KendryteIDE\UserData\latest\user-data\CachedData\e7a289810b81f69dbc43081e47cb9afd9a568bcb
 SET VSCODE_PATH=E:\Installers\updater.alpha.20190625.1.win32\KendryteIDE\Application\app_1.40.0-alpha_20191028.3
-SET VSCODE_PID=37172
+SET VSCODE_PID=90832
 SET VSCODE_PORTABLE=E:\Installers\updater.alpha.20190625.1.win32\KendryteIDE\UserData\latest
 SET windir=C:\WINDOWS
 SET ZES_ENABLE_SYSMAN=1
@@ -63,4 +65,4 @@ SET PYTHONDONTWRITEBYTECODE=yes
 SET CMAKE_MAKE_PROGRAM=make
 SET KENDRYTE_IDE=yes
 SET LANG=en_US.utf-8
-"E:/Installers/updater.alpha.20190625.1.win32/KendryteIDE/LocalPackage/cmake/bin/cmake.exe" --build e:/Github/kengryte-lvgl/build -- -j 11
+"E:/Installers/updater.alpha.20190625.1.win32/KendryteIDE/LocalPackage/cmake/bin/cmake.exe" --build e:/Github/kendryte-lvgl/build -- -j 11

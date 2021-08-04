@@ -3,7 +3,7 @@
     "downloadSections": [
         {
             "id": "1627694655241",
-            "filesize": 171,
+            "filesize": 227,
             "name": "",
             "address": "0x601000",
             "autoAddress": true,
@@ -13,6 +13,6 @@
         }
     ],
     "baseAddress": "0x601000",
-    "totalSize": 171,
+    "totalSize": 227,
     "endAddress": "0x602000"
 }
