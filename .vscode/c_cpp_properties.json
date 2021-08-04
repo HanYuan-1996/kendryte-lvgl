@@ -8,7 +8,7 @@
             "cStandard": "c11",
             "cppStandard": "c++17",
             "intelliSenseMode": "gcc-x64",
-            "compileCommands": "e:/Github/kengryte-lvgl/.vscode/compile_commands.backup.json",
+            "compileCommands": "e:/Github/kendryte-lvgl/.vscode/compile_commands.backup.json",
             "includePath": [
                 "E:/Installers/updater.alpha.20190625.1.win32/KendryteIDE/LocalPackage/toolchain/riscv64-unknown-elf/include",
                 "E:/Installers/updater.alpha.20190625.1.win32/KendryteIDE/LocalPackage/toolchain/lib/gcc/riscv64-unknown-elf/8.2.0/include",
