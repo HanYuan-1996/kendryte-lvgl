@@ -4,7 +4,7 @@
 
 #define _START 0x601000
 #define _END 0x602000
-#define _SIZE 227
+#define _SIZE 289
 
 #endif // _KENDRYTE_IDE_FLASH_MANGER_OUT_H
 
