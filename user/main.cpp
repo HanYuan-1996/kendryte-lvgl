@@ -1,6 +1,6 @@
-#include <timer.h>
 #include <stdarg.h>
 #include <stdio.h>
+#include <timer.h>
 
 #include "App.h"
 #include "lv_port_disp.h"
@@ -35,7 +35,7 @@ int main() {
   /* initialize the lvgl lib */
   lv_init();
   lv_port_disp_init();
-  lv_port_fs_init();
+  lv_fs_if_fatfs_init();
 
   /* setup app */
   setup();
@@ -54,12 +54,10 @@ int main() {
     lv_task_handler();
     __wfi();
 
-    if(++count % 60000 == 0){
+    if (++count % 60000 == 0) {
       App_save();
     }
-
   }
 
   return 1;
 }
-
