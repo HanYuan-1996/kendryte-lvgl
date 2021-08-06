@@ -15,12 +15,14 @@ void __wfi() { asm volatile("wfi"); }
 void setup() { App_Init(); }
 
 /* lvgl tick, 5ms */
-int lv_timer_callback(void *ctx) {
+int lv_timer_callback(void *ctx)
+{
   lv_tick_inc(5);
   return 1;
 }
 
-int main() {
+int main(int argc, char *argv[])
+{
   /**
    *    initialize bsp setting
    *    already done before enter main func
@@ -49,12 +51,14 @@ int main() {
 
   static int count = 0;
   /* lvgl main loop */
-  while (1) {
+  while (1)
+  {
     /* do something */
     lv_task_handler();
     __wfi();
 
-    if (++count % 60000 == 0) {
+    if (++count % 60000 == 0)
+    {
       App_save();
     }
   }
