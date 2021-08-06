@@ -41,18 +41,20 @@
 #define SD_CMD58 58  /*!< CMD58 = 0x58 */
 #define SD_CMD59 59  /*!< CMD59 = 0x59 */
 
+#define SD_CS_PIN 29
+
 SD_CardInfo cardinfo;
 
-void SD_CS_HIGH(void) { gpiohs_set_pin(29, GPIO_PV_HIGH); }
+void SD_CS_HIGH(void) { gpiohs_set_pin(SD_CS_PIN, GPIO_PV_HIGH); }
 
-void SD_CS_LOW(void) { gpiohs_set_pin(29, GPIO_PV_LOW); }
+void SD_CS_LOW(void) { gpiohs_set_pin(SD_CS_PIN, GPIO_PV_LOW); }
 
 void SD_HIGH_SPEED_ENABLE(void) {
   spi_set_clk_rate(SPI_DEVICE_INDEX, 10000000);
 }
 
 static void sd_lowlevel_init() {
-  gpiohs_set_drive_mode(29, GPIO_DM_OUTPUT);
+  gpiohs_set_drive_mode(SD_CS_PIN, GPIO_DM_OUTPUT);
   spi_set_clk_rate(SPI_DEVICE_INDEX, 200000); /*set clk rate*/
 }
 
